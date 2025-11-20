@@ -1,17 +1,17 @@
-import React from 'react';
-import { Header } from '../components/layout/Header';
-import { Footer } from '../components/layout/Footer';
-import { RestaurantCard } from '../components/restaurant/RestaurantCard';
-import { useData } from '../contexts/DataContext';
-import { Sprout } from 'lucide-react';
+import React from "react";
+import { Header } from "../components/layout/Header";
+import { Footer } from "../components/layout/Footer";
+import { RestaurantCard } from "../components/restaurant/RestaurantCard";
+import { useData } from "../contexts/DataContext";
+import { Sprout } from "lucide-react";
 
 export const Homepage: React.FC = () => {
   const { restaurants } = useData();
-  
+
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       <main>
         <section className="relative overflow-hidden bg-gradient-to-br from-secondary/40 via-white to-accent/20 py-20">
           <div className="container mx-auto px-4 md:px-6">
@@ -21,36 +21,47 @@ export const Homepage: React.FC = () => {
                   <Sprout className="h-8 w-8 text-white" />
                 </div>
               </div>
-              <h1 className="mb-4">Support Local Kitchens. Nurture Your Community.</h1>
+              <h1 className="mb-4">
+                One meal for you. One meal for someone who needs
+                it. A smarter way to share a warm meal.
+              </h1>
               <p className="text-muted-foreground">
-                Order delicious meals from eco-conscious restaurants committed to sustainability, 
-                regenerative practices, and community support. Every order makes a difference.
+                Our software makes donation meals part of
+                everyday ordering—quick, transparent, and free
+                for restaurants. Customers can add a second meal
+                to give forward, and people in need can claim it
+                with dignity. Restaurants earn more per order
+                while strengthening the communities around them.
               </p>
             </div>
           </div>
-          
+
           <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-accent/30 blur-3xl"></div>
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl"></div>
         </section>
-        
+
         <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mb-12">
               <h2 className="mb-2">Local Restaurants</h2>
               <p className="text-muted-foreground">
-                Discover restaurants making a positive impact on our community and environment
+                Discover restaurants making a positive impact on
+                our community and environment
               </p>
             </div>
-            
+
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {restaurants.map((restaurant) => (
-                <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+                <RestaurantCard
+                  key={restaurant.id}
+                  restaurant={restaurant}
+                />
               ))}
             </div>
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

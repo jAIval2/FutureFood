@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 interface EmailModalProps {
   isOpen: boolean;
@@ -16,25 +22,29 @@ export const EmailModal: React.FC<EmailModalProps> = ({
   onSubmit,
   onBack,
 }) => {
-  const [email, setEmail] = useState('');
-  
+  const [email, setEmail] = useState("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       onSubmit(email);
     }
   };
-  
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Where can we send your donation photo?</DialogTitle>
+          <DialogTitle>
+            Where can we send your donation acknowledgement?
+          </DialogTitle>
           <DialogDescription>
-            We'll send you a photo when your donation is delivered to someone in need.
+            We'll send you a message when your donation is
+            delivered to someone in need with a message they
+            have for you.
           </DialogDescription>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="email">Email Address</Label>
@@ -48,10 +58,11 @@ export const EmailModal: React.FC<EmailModalProps> = ({
               className="rounded-lg"
             />
             <p className="text-muted-foreground">
-              We respect your privacy. Your email will only be used to send you the donation photo.
+              We respect your privacy. Your email will only be
+              used to send you the donation photo.
             </p>
           </div>
-          
+
           <div className="flex gap-3">
             <button
               type="button"

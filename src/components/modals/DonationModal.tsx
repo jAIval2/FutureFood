@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
-import { Minus, Plus } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { MenuItemData } from '../../lib/mock-data';
+import image_d9d1c0665c55d36d418e60380e28229419373987 from 'figma:asset/d9d1c0665c55d36d418e60380e28229419373987.png';
+import React, { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../ui/dialog";
+import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { MenuItemData } from "../../lib/mock-data";
 
 interface DonationModalProps {
   isOpen: boolean;
@@ -21,7 +28,8 @@ export const DonationModal: React.FC<DonationModalProps> = ({
   donationItems,
   restaurantName,
 }) => {
-  const [selectedItem, setSelectedItem] = useState<MenuItemData | null>(null);
+  const [selectedItem, setSelectedItem] =
+    useState<MenuItemData | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   const handleSelectItem = (item: MenuItemData) => {
@@ -30,12 +38,12 @@ export const DonationModal: React.FC<DonationModalProps> = ({
   };
 
   const handleIncrement = () => {
-    setQuantity(prev => prev + 1);
+    setQuantity((prev) => prev + 1);
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity(prev => prev - 1);
+      setQuantity((prev) => prev - 1);
     }
   };
 
@@ -53,21 +61,23 @@ export const DonationModal: React.FC<DonationModalProps> = ({
         <DialogHeader>
           <DialogTitle>Add a Free Meal</DialogTitle>
           <DialogDescription>
-            Your order can include a free meal for someone in need. We'll send you a photo of the donation.
+            Your order can include a free meal for someone in
+            need. We'll make sure it gets to them and update you
+            via email!
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-6">
           <div className="flex justify-center">
             <div className="overflow-hidden rounded-2xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1760137721475-26feb21451b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kcyUyMHNoYXJpbmclMjBmb29kfGVufDF8fHx8MTc2MzQ3NjYxMHww&ixlib=rb-4.1.0&q=80&w=1080"
+                src={image_d9d1c0665c55d36d418e60380e28229419373987}
                 alt="Hands sharing food"
-                className="h-48 w-full object-cover"
+                className="h-48 w-full object-cover rounded-[5px]"
               />
             </div>
           </div>
-          
+
           <div className="space-y-3">
             <h3>Choose a meal to donate:</h3>
             {donationItems.map((item) => (
@@ -75,8 +85,8 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                 key={item.id}
                 className={`rounded-xl border p-4 transition-all ${
                   selectedItem?.id === item.id
-                    ? 'border-primary bg-primary/5 shadow-md'
-                    : 'bg-card hover:border-primary/50'
+                    ? "border-primary bg-primary/5 shadow-md"
+                    : "bg-card hover:border-primary/50"
                 }`}
               >
                 <button
@@ -85,14 +95,20 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                 >
                   <div className="flex-1">
                     <h4 className="mb-1">{item.name}</h4>
-                    <p className="text-muted-foreground">{item.description}</p>
+                    <p className="text-muted-foreground">
+                      {item.description}
+                    </p>
                   </div>
-                  <span className="shrink-0 text-primary">${item.price.toFixed(2)}</span>
+                  <span className="shrink-0 text-primary">
+                    ${item.price.toFixed(2)}
+                  </span>
                 </button>
-                
+
                 {selectedItem?.id === item.id && (
                   <div className="mt-4 flex items-center justify-between border-t pt-4">
-                    <span className="text-muted-foreground">Quantity:</span>
+                    <span className="text-muted-foreground">
+                      Quantity:
+                    </span>
                     <div className="flex items-center gap-3">
                       <button
                         onClick={handleDecrement}
@@ -101,7 +117,9 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                       >
                         <Minus className="h-4 w-4" />
                       </button>
-                      <span className="w-8 text-center">{quantity}</span>
+                      <span className="w-8 text-center">
+                        {quantity}
+                      </span>
                       <button
                         onClick={handleIncrement}
                         className="flex h-8 w-8 items-center justify-center rounded-full border transition-colors hover:bg-secondary"
@@ -114,7 +132,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
               </div>
             ))}
           </div>
-          
+
           <div className="flex gap-3">
             <button
               onClick={onSkip}
@@ -126,7 +144,10 @@ export const DonationModal: React.FC<DonationModalProps> = ({
               onClick={handleAddMeal}
               className="flex-1 rounded-full bg-primary px-6 py-3 text-white shadow-lg shadow-primary/30 transition-all hover:scale-105"
             >
-              Add {selectedItem ? `${quantity} Meal${quantity > 1 ? 's' : ''}` : 'a Meal'}
+              Add{" "}
+              {selectedItem
+                ? `${quantity} Meal${quantity > 1 ? "s" : ""}`
+                : "a Meal"}
             </button>
           </div>
         </div>

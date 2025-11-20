@@ -53,7 +53,7 @@ export const OrderConfirmation: React.FC = () => {
                   <Heart className="h-8 w-8 text-accent" />
                 </div>
                 <p className="text-accent-foreground">
-                  A local volunteer will deliver your donated meal. You'll receive a photo soon at {orderDetails.email}.
+                  A local volunteer will deliver your donated meal. You'll receive an acknowledgment soon at {orderDetails.email}.
                 </p>
               </div>
             )}

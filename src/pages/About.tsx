@@ -5,6 +5,7 @@ import { Footer } from '../components/layout/Footer';
 import { LoadingAnimation } from '../components/about/LoadingAnimation';
 import { StatCard } from '../components/about/StatCard';
 import { RestaurantShowcase } from '../components/about/RestaurantShowcase';
+import { DonationMessages } from '../components/about/DonationMessages';
 import { useData } from '../contexts/DataContext';
 import { Sprout, ArrowDown, Mail } from 'lucide-react';
 
@@ -176,8 +177,11 @@ export const About: React.FC = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-sand/30 to-sage/20">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="relative py-20 md:py-32 bg-gradient-to-br from-sand/30 to-sage/20 overflow-hidden">
+        {/* Floating Message Bubbles */}
+        <DonationMessages />
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
