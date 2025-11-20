@@ -86,6 +86,7 @@ export const RestaurantEditor: React.FC<RestaurantEditorProps> = ({
       price: 0,
       description: '',
       category: 'Mains',
+      allergens: '',
     };
     setMenuItems(prev => [...prev, newItem]);
   };
@@ -107,6 +108,7 @@ export const RestaurantEditor: React.FC<RestaurantEditorProps> = ({
       price: 10,
       description: '',
       category: 'Donation',
+      allergens: 'VG',
     };
     setDonationItems(prev => [...prev, newItem]);
   };
@@ -259,6 +261,15 @@ export const RestaurantEditor: React.FC<RestaurantEditorProps> = ({
                           className="mt-1"
                         />
                       </div>
+                      <div>
+                        <Label>Allergens (e.g., V, VG, GF, DF)</Label>
+                        <Input
+                          value={item.allergens || ''}
+                          onChange={(e) => handleUpdateMenuItem(index, 'allergens', e.target.value)}
+                          className="mt-1"
+                          placeholder="V, VG, GF, DF"
+                        />
+                      </div>
                       <div className="sm:col-span-2">
                         <Label>Description</Label>
                         <Textarea
@@ -313,6 +324,15 @@ export const RestaurantEditor: React.FC<RestaurantEditorProps> = ({
                           value={item.price}
                           onChange={(e) => handleUpdateDonationItem(index, 'price', parseFloat(e.target.value))}
                           className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label>Allergens (e.g., VG, DF)</Label>
+                        <Input
+                          value={item.allergens || ''}
+                          onChange={(e) => handleUpdateDonationItem(index, 'allergens', e.target.value)}
+                          className="mt-1"
+                          placeholder="VG, DF"
                         />
                       </div>
                       <div className="sm:col-span-2">

@@ -7,9 +7,9 @@ import {
   Heart, 
   Mail, 
   Settings, 
-  LogOut,
-  Leaf 
+  LogOut
 } from 'lucide-react';
+import { assets } from '../../lib/assets';
 
 const navItems = [
   { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -27,10 +27,12 @@ export const AdminSidebar: React.FC = () => {
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-sidebar text-sidebar-foreground">
       <div className="flex h-full flex-col">
         <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sidebar-primary">
-            <Leaf className="h-5 w-5 text-sidebar-primary-foreground" />
-          </div>
-          <span>Future Feast Admin</span>
+          <img 
+            src={assets.logo} 
+            alt="Future Feast Logo" 
+            className="h-8 w-auto"
+          />
+          <span>Admin</span>
         </div>
         
         <nav className="flex-1 space-y-1 p-4">

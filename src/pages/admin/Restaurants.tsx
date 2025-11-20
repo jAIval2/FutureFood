@@ -4,12 +4,11 @@ import { RestaurantEditor } from '../../components/admin/RestaurantEditor';
 import { Badge } from '../../components/ui/badge';
 import { Edit, Plus, Trash2 } from 'lucide-react';
 import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
-import { restaurants as initialRestaurants, menusByRestaurant as initialMenus, donationMenuItems as initialDonations, Restaurant, MenuItemData } from '../../lib/mock-data';
+import { useData } from '../../contexts/DataContext';
+import { Restaurant, MenuItemData } from '../../lib/mock-data';
 
 export const AdminRestaurants: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>(initialRestaurants);
-  const [menusByRestaurant, setMenusByRestaurant] = useState<Record<string, MenuItemData[]>>(initialMenus);
-  const [donationMenuItems, setDonationMenuItems] = useState<Record<string, MenuItemData[]>>(initialDonations);
+  const { restaurants, menusByRestaurant, donationMenuItems, updateRestaurant, addRestaurant, deleteRestaurant, updateMenu, updateDonationMenu } = useData();
   const [editorOpen, setEditorOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
 
@@ -26,38 +25,22 @@ export const AdminRestaurants: React.FC = () => {
   const handleSaveRestaurant = (restaurant: Restaurant, menuItems: MenuItemData[], donationItems: MenuItemData[]) => {
     if (selectedRestaurant) {
       // Update existing restaurant
-      setRestaurants(prev => prev.map(r => r.id === restaurant.id ? restaurant : r));
+      updateRestaurant(restaurant.id, restaurant);
     } else {
       // Add new restaurant
-      setRestaurants(prev => [...prev, restaurant]);
+      addRestaurant(restaurant);
     }
     
     // Update menus
-    setMenusByRestaurant(prev => ({
-      ...prev,
-      [restaurant.id]: menuItems,
-    }));
+    updateMenu(restaurant.id, menuItems);
     
     // Update donation items
-    setDonationMenuItems(prev => ({
-      ...prev,
-      [restaurant.id]: donationItems,
-    }));
+    updateDonationMenu(restaurant.id, donationItems);
   };
 
   const handleDeleteRestaurant = (restaurantId: string) => {
     if (confirm('Are you sure you want to delete this restaurant?')) {
-      setRestaurants(prev => prev.filter(r => r.id !== restaurantId));
-      setMenusByRestaurant(prev => {
-        const newMenus = { ...prev };
-        delete newMenus[restaurantId];
-        return newMenus;
-      });
-      setDonationMenuItems(prev => {
-        const newDonations = { ...prev };
-        delete newDonations[restaurantId];
-        return newDonations;
-      });
+      deleteRestaurant(restaurantId);
     }
   };
 

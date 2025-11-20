@@ -2,10 +2,12 @@ import React from 'react';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { RestaurantCard } from '../components/restaurant/RestaurantCard';
-import { restaurants } from '../lib/mock-data';
+import { useData } from '../contexts/DataContext';
 import { Sprout } from 'lucide-react';
 
 export const Homepage: React.FC = () => {
+  const { restaurants } = useData();
+  
   return (
     <div className="min-h-screen">
       <Header />

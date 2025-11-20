@@ -8,7 +8,7 @@ import { DonationModal } from '../components/modals/DonationModal';
 import { EmailModal } from '../components/modals/EmailModal';
 import { Badge } from '../components/ui/badge';
 import { useCart } from '../contexts/CartContext';
-import { restaurants, menusByRestaurant, donationMenuItems } from '../lib/mock-data';
+import { useData } from '../contexts/DataContext';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { ArrowLeft } from 'lucide-react';
 
@@ -16,6 +16,7 @@ export const RestaurantMenu: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, setDonation, setDonationEmail } = useCart();
+  const { restaurants, menusByRestaurant, donationMenuItems } = useData();
   
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
